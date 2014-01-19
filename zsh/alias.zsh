@@ -33,5 +33,6 @@ alias curl='curl -A Mozilla'
 alias feh='feh -Frd'
 alias mtr='mtr -t'
 alias ri='ri -Tf ansi'
+alias transmission='transmission-remote 127.0.0.1'
 
 # vim:ft=zsh
