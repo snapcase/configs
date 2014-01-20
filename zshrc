@@ -2,9 +2,15 @@
 # dot zshrc
 #
 # snapcase 
+#
 
 # includes
-for i ($HOME/.zsh/{colors,alias,functions}.zsh) source $i
+function () {
+  local f
+  for f in $HOME/.zsh/*.zsh; do
+    source $f
+  done
+}
 
 # completion
 autoload complist
@@ -16,18 +22,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '\ee' edit-command-line
 
-# misc
-bindkey '^R' history-incremental-search-backward
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
-
-# mintty
-if [[ $OS =~ "Windows" ]]; then
-  bindkey '\e[H' beginning-of-line
-  bindkey '\e[F' end-of-line
-fi
-
-# Options
+# options
 setopt correct
 setopt hist_ignore_all_dups
 setopt autocd
@@ -47,7 +42,7 @@ setopt hist_ignore_space
 setopt interactivecomments
 setopt dvorak
 
-# History
+# history
 HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
@@ -58,44 +53,23 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# keys
-bindkey '^f' forward-word
-bindkey '^b' backward-word
-
-bindkey "\e[1~" beginning-of-line
-bindkey "\e[7~" beginning-of-line
-bindkey "\e[8~" end-of-line
-bindkey "\e[4~" end-of-line
-bindkey "\e[3~" delete-char
-
 # prompt
 export PS1='%m:%(1j.%%%j:.)%1~%# '
 
 # file mode creation mask
 umask 022
 
-# man search order
-#export MANSECT="2:3:3p:1:1p:8:4:5:6:7:9:0p:tcl:n:l:p:o:1x:2x:3x:4x:5x:6x:7x:8x"
-
-# extending the path var
-if [ -e $HOME/bin ]; then
-  export PATH=$HOME/bin:$PATH
-fi
-
-# remove duplicates in path
-typeset -U path
-
-# set default editor
+# default editor
 if [ -f /usr/bin/vim ] ; then
   export EDITOR=/usr/bin/vim
 fi
 
-# update title
+# terminal title
 case $TERM in
   xterm*|rxvt*|screen*)
     precmd() { print -Pn "\e]0;%m:%~\a" }
     preexec() { print -Pn "\e]0;%m:%~\a" }
-;;
+    ;;
 esac
 
 # colored man-pages
@@ -108,5 +82,4 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 # various exports
-export GEM_HOME=$HOME/.gem/ruby/2.0.0     # ruby gems
 export READNULLCMD=less                   # set zsh pager(<) to less
