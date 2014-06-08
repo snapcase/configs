@@ -1,1 +1,2 @@
 gem: --no-ri --no-rdoc
+gemhome: /home/snapcase/.gem/ruby/2.1.0
