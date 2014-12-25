@@ -47,4 +47,12 @@ zcalcd () { print $(( [#10] ans = ${1:-ans} )) }
 zcalco () { print $(( [#8] ans = ${1:-ans} )) }
 zcalcb () { print $(( [#2] ans = ${1:-ans} )) }
 
+q3s() {
+  echo "\xff\xff\xff\xffgetstatus" | \
+  socat - udp4:$1 | \
+  sed -e '1d' \
+    -e '2s/\\\([^\]*\)\\\([^\]*\)/\1=\2\n/g' \
+    -e 's/\^[0-9a-zA-Z]//g'
+}
+
 # vim:ft=zsh
