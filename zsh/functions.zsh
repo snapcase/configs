@@ -51,8 +51,8 @@ q3s() {
   echo "\xff\xff\xff\xffgetstatus" | \
   socat - udp4:$1 | \
   sed -e '1d' \
-    -e '2s/\\\([^\]*\)\\\([^\]*\)/\1=\2\n/g' \
-    -e 's/\^[0-9a-zA-Z]//g'
+      -e '2s/\\\([^\]*\)\\\([^\]*\)/\1=\2\n/g' \
+      -e 's/\^[0-9a-zA-Z]//g'
 }
 
 # vim:ft=zsh
