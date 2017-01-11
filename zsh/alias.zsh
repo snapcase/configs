@@ -25,7 +25,7 @@ alias t='mkcd $HOME/mek/tmp'
 alias share='python2 -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
 alias xp='xprop | grep "WM_WINDOW_ROLE\|WM_CLASS"'
 alias make='make -j3'
-alias ud='sudo lsof | grep "DEL.*lib" | cut -f 1 -d " " | sort -u'
+alias ud="sudo lsof | grep 'DEL.*lib' | awk '{print \$1 \" \" \$2}' | sort -u"
 
 # apps
 alias wget='wget -U Mozilla'

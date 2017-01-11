@@ -83,3 +83,6 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 # various exports
 export READNULLCMD=less                   # set zsh pager(<) to less
+
+# no duplicates
+typeset -U PATH path

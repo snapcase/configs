@@ -1,2 +1,2 @@
 gem: --no-ri --no-rdoc
-gemhome: /home/snapcase/.gem/ruby/2.2.0
+gem: --user-install
