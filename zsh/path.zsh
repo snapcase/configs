@@ -1,14 +1,14 @@
 # extend path
 
-
 function () {
   local pathdirs
-  local ruby_version
-  [[ -e =ruby ]] && ruby_version=$(ruby -e 'puts RUBY_VERSION')
+  local gem_path
+  which gem &>/dev/null
+  [ $? -eq 0 ] && gem_path="$(gem env gempath | cut -d: -f1)"
   pathdirs=(
     $HOME/bin
   )
-  [[ -n $ruby_version ]] && pathdirs+="${HOME}/.gem/ruby/${ruby_version}/bin"
+  [ -n $gem_path ] && pathdirs+="${gem_path}/bin"
   # prepend, don't append
   for dir in $pathdirs; do
     [ -d $dir ] && path[1,0]=$dir
